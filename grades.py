@@ -7,7 +7,7 @@ true_y3 = 0
 print("Input Module Percentages for 2nd Year")
 print("('?' for unkown grade)")
 for i in range(8):
-    grade = input("M-" + str(i+1) + ": ")
+    grade = input("M-" + str(i + 1) + ": ")
     if grade == '?':
         unknown_2 += 1
     else:
@@ -16,7 +16,7 @@ for i in range(8):
 print("Now 3rd Year Modules: ")
 
 for i in range(8):
-    grade = input("M-" + str(i+1) + ": ")
+    grade = input("M-" + str(i + 1) + ": ")
     if grade == '?':
         unknown_3 += 1
     else:
@@ -25,9 +25,9 @@ for i in range(8):
 y2_grades.sort(reverse=True)
 y3_grades.sort(reverse=True)
 
-
 if len(y2_grades) != 0:
-    y2_average = sum(y2_grades)/ len(y2_grades)
+    y2_average = sum(y2_grades) / len(y2_grades)
+    print("average: " + str(y2_average))
 else:
     y2_average = 50
 
@@ -47,21 +47,26 @@ def Average_Calc(y2_grads, y3_grads, average_2, average_3, unknown_2, unknown_3)
     for i in range(unknown_3):
         y3_grad.append(average_3)
 
-
     true_y3_3w = 0
     true_y3_2w = 0
 
+    true_y2_2w = 0
+    true_y2_1w = 0
 
-    for i in range(4):
+    for i in range(6):
         true_y3_3w += (y3_grad[i])
 
-    for i in range(4):
-        true_y3_2w += (y3_grad[i+4] )
+    for i in range(2):
+        true_y3_2w += (y3_grad[i + 4])
 
-    avg_true_y3_3w = true_y3_3w/4
-    avg_true_y3_2W = true_y3_2w/4
+    for i in range(2):
+        true_y2_2w += (y2_grad[i])
 
-    return round((((avg_true_y3_2W*2) + (avg_true_y3_3w*3) +(sum(y2_grad)/8))/6),2)
+    for i in range(6):
+        true_y2_1w += (y2_grad[i + 4])
+
+    return round(((((true_y3_3w * 3) + (true_y3_2w * 2) + (true_y2_1w * 2) + (true_y2_1w * 1)) / (3200)) * 100), 2)
+
 
 print("\n")
 
@@ -69,13 +74,11 @@ print("-------------------------------------------")
 
 print("\nFINAL GRADE")
 
-
 print("\nBased on Averages")
-print(str(Average_Calc(y2_grades, y3_grades,y2_average,y3_average,unknown_2,unknown_3)) + "%")
+print(str(Average_Calc(y2_grades, y3_grades, y2_average, y3_average, unknown_2, unknown_3)) + "%")
 
 print("\nWorst Case")
-print(str(Average_Calc(y2_grades, y3_grades,0,0,unknown_2,unknown_3)) + "%")
+print(str(Average_Calc(y2_grades, y3_grades, 0, 0, unknown_2, unknown_3)) + "%")
 
 print("\nBest Case")
-print(str(Average_Calc(y2_grades, y3_grades,70,70,unknown_2,unknown_3)) + "%")
-
+print(str(Average_Calc(y2_grades, y3_grades, 70, 70, unknown_2, unknown_3)) + "%")
